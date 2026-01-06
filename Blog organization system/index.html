@@ -57,6 +57,74 @@
         
         <!-- 右侧：输出板块 -->
         <div class="section">
+            <!-- 筛选搜索区域 -->
+            <div class="section-title">
+                <i class="fas fa-search"></i> 筛选与搜索
+            </div>
+            
+            <div class="filter-section">
+                <!-- 关键词搜索 -->
+                <div class="input-group">
+                    <label class="input-label">关键词搜索</label>
+                    <input type="text" id="keywordSearch" placeholder="输入关键词搜索内容...">
+                </div>
+                
+                <!-- 时间筛选 -->
+                <div class="input-group">
+                    <label class="input-label">时间筛选</label>
+                    <div class="time-filter-group">
+                        <select id="timeFilterType" class="time-select">
+                            <option value="all">全部时间</option>
+                            <option value="year">按年</option>
+                            <option value="month">按年月</option>
+                            <option value="day">按具体日期</option>
+                            <option value="range">日期范围</option>
+                        </select>
+                        
+                        <div id="timeFilterControls" class="time-controls">
+                            <!-- 动态加载时间筛选控件 -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 标签筛选 -->
+                <div class="input-group">
+                    <label class="input-label">标签筛选</label>
+                    <div class="tag-filter-options">
+                        <div class="tag-filter-option">
+                            <input type="radio" name="tagFilterMode" id="tagFilterAll" value="all" checked>
+                            <label for="tagFilterAll">全部标签</label>
+                        </div>
+                        <div class="tag-filter-option">
+                            <input type="radio" name="tagFilterMode" id="tagFilterAny" value="any">
+                            <label for="tagFilterAny">包含任意选中标签</label>
+                        </div>
+                        <div class="tag-filter-option">
+                            <input type="radio" name="tagFilterMode" id="tagFilterAllSelected" value="allSelected">
+                            <label for="tagFilterAllSelected">包含所有选中标签</label>
+                        </div>
+                    </div>
+                    <div class="filter-tags-container" id="filterTagsContainer">
+                        <!-- 动态加载筛选标签 -->
+                    </div>
+                </div>
+                
+                <!-- 筛选操作按钮 -->
+                <div class="filter-button-group">
+                    <button class="button button-primary" id="applyFilterButton">
+                        <i class="fas fa-filter"></i> 应用筛选
+                    </button>
+                    <button class="button" id="resetFilterButton">
+                        <i class="fas fa-redo"></i> 重置筛选
+                    </button>
+                </div>
+                
+                <!-- 筛选结果统计 -->
+                <div class="filter-stats" id="filterStats">
+                    显示全部 <span id="filteredCount">0</span> 条博客
+                </div>
+            </div>
+            
             <div class="section-title">
                 <i class="fas fa-list"></i> 博客列表
             </div>
