@@ -338,7 +338,7 @@ h1::after {
 }
 
 h2 {
-    font-size: 2rem;
+    font-size: 1.6rem;
     font-weight: 600;
     color: var(--color-text-secondary);
     margin: var(--space-2xl) 0 var(--space-lg);
@@ -493,7 +493,7 @@ p {
     display: block;
     border: 6px solid transparent;
     background: linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
-                linear-gradient(135deg, var(--color-primary), var(--color-accent), var(--color-secondary)) border-box;
+                linear-gradient(#E6F0FF) border-box;
     box-shadow: 
         var(--shadow-lg),
         0 0 30px rgba(255, 140, 0, 0.3),
@@ -545,7 +545,7 @@ p {
     align-items: center;
     justify-content: center;
     gap: var(--space-sm);
-    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-primary) 100%);
+    background: linear-gradient(135deg, #000000 0%, var(--color-primary) 80%);
     color: white;
     padding: var(--space-sm) var(--space-xl);
     border-radius: var(--radius-lg);
@@ -565,7 +565,7 @@ p {
 }
 
 .btn::before {
-    content: '';
+    content: '☀';
     position: absolute;
     top: 0;
     left: -100%;
