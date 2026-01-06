@@ -320,6 +320,129 @@ textarea {
     border-top: 1px solid var(--border);
 }
 
+/* 筛选区域样式 */
+.filter-section {
+    background: #f9f9f9;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 12px;
+    margin-bottom: 16px;
+}
+
+.time-filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.time-select {
+    width: 100%;
+    background: #fff;
+    border: 1px solid var(--border);
+    color: #333;
+    font-family: var(--pixel-font);
+    font-size: 12px;
+    padding: 6px 8px;
+    border-radius: 2px;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 12px;
+    padding-right: 30px;
+}
+
+.time-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.time-control {
+    width: 100%;
+}
+
+/* 标签筛选选项 */
+.tag-filter-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.tag-filter-option {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #555;
+}
+
+.tag-filter-option input[type="radio"] {
+    width: auto;
+    margin: 0;
+}
+
+.filter-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+    min-height: 36px;
+    padding: 8px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+}
+
+.filter-tag {
+    background: var(--medium);
+    color: #333;
+    padding: 4px 10px;
+    font-size: 11px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border-radius: 12px;
+    transition: all 0.2s;
+}
+
+.filter-tag:hover {
+    background: var(--accent);
+}
+
+.filter-tag.active {
+    background: #333;
+    color: #fff;
+    border-color: #333;
+}
+
+.filter-button-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 16px 0;
+}
+
+.filter-stats {
+    font-size: 12px;
+    color: #333;
+    text-align: center;
+    padding: 8px;
+    background: #f0f0f0;
+    border-radius: 2px;
+    margin-top: 12px;
+}
+
+.filter-stats span {
+    font-weight: 600;
+    color: #000;
+}
+
+/* 移动端优化 */
 @media (max-width: 768px) {
     .container {
         grid-template-columns: 1fr;
@@ -333,6 +456,66 @@ textarea {
     
     .section {
         padding: 10px;
+    }
+    
+    .filter-section {
+        padding: 10px;
+    }
+    
+    .tag-filter-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .time-controls {
+        grid-template-columns: 1fr;
+    }
+    
+    .filter-button-group {
+        grid-template-columns: 1fr;
+    }
+    
+    /* 博客列表优化 */
+    .blog-item {
+        padding: 10px;
+    }
+    
+    .blog-item-header {
+        flex-direction: column;
+        gap: 4px;
+    }
+    
+    .blog-item-actions {
+        flex-direction: column;
+        gap: 6px;
+    }
+    
+    .action-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* 响应式表单输入 */
+textarea, input, select {
+    font-size: 14px; /* 手机端字体更大 */
+}
+
+@media (min-width: 769px) {
+    textarea, input, select {
+        font-size: 12px; /* 电脑端恢复原大小 */
+    }
+}
+
+/* 触摸友好优化 */
+.button, .action-btn, .tag, .filter-tag {
+    min-height: 36px;
+    touch-action: manipulation;
+}
+
+/* 防止移动端缩放 */
+@media (max-width: 768px) {
+    input, textarea, select {
+        font-size: 16px;
     }
 }
 
