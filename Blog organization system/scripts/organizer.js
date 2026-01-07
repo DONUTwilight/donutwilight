@@ -429,19 +429,24 @@ class BlogOrganizer {
         this.applyFilters();
     }
     
-    // 更新筛选统计
+    // 更新筛选统计 - 修复显示问题
     updateFilterStats() {
         const total = this.blogs.length;
         const filtered = this.filteredBlogs.length;
-        const statsElement = document.getElementById('filterStats');
+        
+        // 直接设置文本内容，不要使用innerHTML
         const countElement = document.getElementById('filteredCount');
+        if (countElement) {
+            countElement.textContent = filtered;
+        }
         
-        countElement.textContent = filtered;
-        
-        if (filtered === total) {
-            statsElement.textContent = `显示全部 ${filtered} 条博客`;
-        } else {
-            statsElement.textContent = `显示 ${filtered} 条博客 (共 ${total} 条)`;
+        const statsElement = document.getElementById('filterStats');
+        if (statsElement) {
+            if (filtered === total) {
+                statsElement.innerHTML = `显示全部 <span id="filteredCount">${filtered}</span> 条博客`;
+            } else {
+                statsElement.innerHTML = `显示 <span id="filteredCount">${filtered}</span> 条博客 (共 ${total} 条)`;
+            }
         }
     }
     
@@ -908,12 +913,19 @@ class BlogOrganizer {
             try {
                 if (file.name.endsWith('.json')) {
                     this.importJson(e.target.result);
+                    alert('导入成功！'); // 添加成功提示
                 } else {
                     alert('请选择.json文件');
                 }
             } catch (error) {
-                alert('导入失败：' + error.message);
+                console.error('导入错误:', error);
+                alert('导入失败：文件格式不正确');
             }
+            event.target.value = '';
+        };
+        
+        reader.onerror = () => {
+            alert('文件读取失败');
             event.target.value = '';
         };
         
@@ -921,40 +933,69 @@ class BlogOrganizer {
     }
     
     importJson(content) {
-        const data = JSON.parse(content);
-        
-        // 兼容性处理
-        if (Array.isArray(data)) {
-            // 旧版本数据，直接是博客数组
-            this.importOldFormat(data);
-        } else if (data.blogs && Array.isArray(data.blogs)) {
-            // 新版本数据
-            this.importNewFormat(data);
-        } else {
-            throw new Error('无效的数据格式');
+        try {
+            const data = JSON.parse(content);
+            
+            // 兼容性处理
+            if (Array.isArray(data)) {
+                // 旧版本数据，直接是博客数组
+                this.importOldFormat(data);
+            } else if (data.blogs && Array.isArray(data.blogs)) {
+                // 新版本数据
+                this.importNewFormat(data);
+            } else {
+                throw new Error('无效的数据格式');
+            }
+            
+            this.saveBlogs();
+            this.saveTags();
+            this.renderBlogList();
+            this.renderTags();
+            this.renderFilterTags();
+            this.applyFilters();
+            this.updateStats();
+            
+        } catch (error) {
+            console.error('JSON解析错误:', error);
+            // 尝试其他可能的格式
+            try {
+                // 可能是不带方括号的JSON数组
+                const trimmedContent = content.trim();
+                if (trimmedContent.startsWith('[') && trimmedContent.endsWith(']')) {
+                    const blogsArray = JSON.parse(trimmedContent);
+                    this.importOldFormat(blogsArray);
+                    
+                    this.saveBlogs();
+                    this.saveTags();
+                    this.renderBlogList();
+                    this.renderTags();
+                    this.renderFilterTags();
+                    this.applyFilters();
+                    this.updateStats();
+                } else {
+                    throw error;
+                }
+            } catch (e) {
+                throw new Error('无法解析数据文件');
+            }
         }
-        
-        this.saveBlogs();
-        this.saveTags();
-        this.renderBlogList();
-        this.renderTags();
-        this.renderFilterTags();
-        this.applyFilters();
-        this.updateStats();
     }
     
     importOldFormat(blogsArray) {
         const existingIds = new Set(this.blogs.map(blog => blog.id));
+        let newBlogCount = 0;
         
         blogsArray.forEach(blog => {
             // 确保博客有必要的字段
             if (!blog.id) blog.id = Date.now() + Math.random();
             if (!blog.created) blog.created = new Date().toISOString();
             if (!blog.tags) blog.tags = [];
+            if (!blog.datetime) blog.datetime = blog.created;
             
             if (!existingIds.has(blog.id)) {
                 this.blogs.push(blog);
                 existingIds.add(blog.id);
+                newBlogCount++;
                 
                 // 提取标签
                 if (blog.tags && Array.isArray(blog.tags)) {
@@ -966,16 +1007,20 @@ class BlogOrganizer {
                 }
             }
         });
+        
+        console.log(`导入 ${newBlogCount} 条新博客`);
     }
     
     importNewFormat(data) {
         const existingIds = new Set(this.blogs.map(blog => blog.id));
+        let newBlogCount = 0;
         
         // 导入博客
         data.blogs.forEach(blog => {
             if (!existingIds.has(blog.id)) {
                 this.blogs.push(blog);
                 existingIds.add(blog.id);
+                newBlogCount++;
             }
         });
         
@@ -987,6 +1032,8 @@ class BlogOrganizer {
                 }
             });
         }
+        
+        console.log(`导入 ${newBlogCount} 条新博客`);
     }
     
     saveBlogs() {
@@ -1021,8 +1068,13 @@ class BlogOrganizer {
     }
     
     loadTags() {
-        const data = localStorage.getItem('pixel_tags');
-        return data ? JSON.parse(data) : ['日常', '技术', '思考', '记录'];
+        try {
+            const data = localStorage.getItem('pixel_tags');
+            return data ? JSON.parse(data) : ['日常', '技术', '思考', '记录'];
+        } catch (e) {
+            console.error('加载标签数据失败:', e);
+            return ['日常', '技术', '思考', '记录'];
+        }
     }
 }
 
