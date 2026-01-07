@@ -17,41 +17,43 @@
     padding: 0;
     box-sizing: border-box;
     image-rendering: crisp-edges;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
     font-family: var(--pixel-font);
     background-color: var(--bg);
     color: var(--light);
-    font-size: 12px;
-    line-height: 1.4;
+    font-size: 14px; /* 手机端基础字体更大 */
+    line-height: 1.5;
     padding: 8px;
     max-width: 100%;
     overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
 }
 
 .container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    max-width: 1200px;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    max-width: 100%;
     margin: 0 auto;
 }
 
 .section {
     background: var(--card-bg);
-    padding: 12px;
-    margin-bottom: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
     border: 1px solid var(--border);
-    border-radius: 2px;
+    border-radius: 4px;
     box-shadow: var(--shadow);
 }
 
 .section-title {
-    font-size: 14px;
+    font-size: 16px;
     color: #333;
-    margin-bottom: 12px;
-    padding-bottom: 6px;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
     border-bottom: 1px solid var(--border);
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -59,14 +61,14 @@ body {
 }
 
 .input-group {
-    margin-bottom: 12px;
+    margin-bottom: 15px;
 }
 
 .input-label {
     display: block;
-    font-size: 11px;
+    font-size: 13px;
     color: #555;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
     font-weight: 500;
 }
 
@@ -76,10 +78,12 @@ textarea, input, select {
     border: 1px solid var(--border);
     color: #333;
     font-family: var(--pixel-font);
-    font-size: 12px;
-    padding: 6px 8px;
-    border-radius: 2px;
+    font-size: 16px; /* 手机端输入字体更大 */
+    padding: 10px 12px;
+    border-radius: 4px;
     transition: border 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 textarea:focus, input:focus, select:focus {
@@ -89,15 +93,16 @@ textarea:focus, input:focus, select:focus {
 }
 
 textarea {
-    min-height: 100px;
-    max-height: 250px;
-    line-height: 1.5;
+    min-height: 120px;
+    max-height: 200px;
+    line-height: 1.6;
+    resize: vertical;
 }
 
 .datetime-group {
     display: grid;
     grid-template-columns: 1fr auto;
-    gap: 8px;
+    gap: 10px;
     align-items: end;
 }
 
@@ -105,16 +110,17 @@ textarea {
     background: var(--medium);
     border: 1px solid var(--border);
     color: #555;
-    padding: 6px 12px;
+    padding: 10px 15px;
     font-family: var(--pixel-font);
-    font-size: 11px;
+    font-size: 13px;
     cursor: pointer;
     white-space: nowrap;
-    border-radius: 2px;
+    border-radius: 4px;
     transition: all 0.2s;
+    min-height: 44px; /* 触摸友好 */
 }
 
-.now-button:hover {
+.now-button:hover, .now-button:active {
     background: var(--accent);
     color: #333;
 }
@@ -122,25 +128,26 @@ textarea {
 .tag-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 8px;
+    gap: 8px;
+    margin-bottom: 10px;
 }
 
 .tag {
     background: var(--medium);
     color: #333;
-    padding: 4px 10px;
-    font-size: 11px;
+    padding: 6px 12px;
+    font-size: 13px;
     border: 1px solid var(--border);
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 4px;
-    border-radius: 12px;
+    gap: 5px;
+    border-radius: 16px;
     transition: all 0.2s;
+    min-height: 36px;
 }
 
-.tag:hover {
+.tag:hover, .tag:active {
     background: var(--accent);
 }
 
@@ -151,28 +158,36 @@ textarea {
 }
 
 .remove-tag {
-    font-size: 14px;
+    font-size: 16px;
     cursor: pointer;
-    padding: 0 2px;
+    padding: 0 3px;
     opacity: 0.7;
+    margin-left: 4px;
 }
 
-.remove-tag:hover {
+.remove-tag:hover, .remove-tag:active {
     opacity: 1;
 }
 
 .media-upload {
     border: 2px dashed var(--border);
-    padding: 20px;
+    padding: 30px 20px;
     text-align: center;
     cursor: pointer;
     background: #fafafa;
-    border-radius: 4px;
+    border-radius: 6px;
     transition: all 0.2s;
     color: #888;
+    font-size: 14px;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
-.media-upload:hover {
+.media-upload:hover, .media-upload:active {
     background: var(--medium);
     border-color: #bbb;
 }
@@ -182,33 +197,39 @@ textarea {
     max-height: 200px;
     margin-top: 10px;
     border: 1px solid var(--border);
-    border-radius: 2px;
+    border-radius: 4px;
     display: block;
+    object-fit: contain;
 }
 
 .button-group {
-    display: flex;
-    gap: 8px;
-    margin-top: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 20px;
 }
 
 .button {
-    flex: 1;
     background: var(--medium);
     border: 1px solid var(--border);
     color: #333;
-    padding: 8px;
+    padding: 12px;
     font-family: var(--pixel-font);
-    font-size: 12px;
+    font-size: 14px;
     cursor: pointer;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    border-radius: 2px;
+    border-radius: 4px;
     transition: all 0.2s;
     font-weight: 500;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
-.button:hover {
+.button:hover, .button:active {
     background: var(--accent);
     color: #000;
 }
@@ -219,86 +240,94 @@ textarea {
     border-color: #333;
 }
 
-.button-primary:hover {
+.button-primary:hover, .button-primary:active {
     background: #555;
 }
 
 .blog-list {
-    max-height: 400px;
+    max-height: 50vh;
     overflow-y: auto;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
+    -webkit-overflow-scrolling: touch;
 }
 
 .blog-item {
     background: #f9f9f9;
     border: 1px solid var(--border);
-    padding: 12px;
-    margin-bottom: 8px;
-    border-radius: 2px;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
     transition: all 0.2s;
 }
 
-.blog-item:hover {
+.blog-item:hover, .blog-item:active {
     background: #f0f0f0;
-    transform: translateY(-1px);
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .blog-item-header {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
-    font-size: 11px;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 10px;
+    font-size: 12px;
     color: #777;
 }
 
 .blog-item-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 4px;
-    margin-top: 8px;
+    gap: 6px;
+    margin-top: 10px;
 }
 
 .blog-tag {
     background: var(--medium);
     color: #333;
-    padding: 2px 6px;
-    font-size: 10px;
-    border-radius: 10px;
+    padding: 3px 8px;
+    font-size: 11px;
+    border-radius: 12px;
 }
 
 .blog-item-content {
-    line-height: 1.5;
-    margin-bottom: 8px;
+    line-height: 1.6;
+    margin-bottom: 10px;
     color: #333;
+    font-size: 14px;
 }
 
 .blog-item-actions {
-    display: flex;
-    gap: 6px;
-    margin-top: 8px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 10px;
 }
 
 .action-btn {
-    padding: 3px 8px;
-    font-size: 10px;
+    padding: 10px;
+    font-size: 13px;
     border: 1px solid var(--border);
     background: #fff;
     cursor: pointer;
-    border-radius: 2px;
+    border-radius: 4px;
     transition: all 0.2s;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
 }
 
-.action-btn:hover {
+.action-btn:hover, .action-btn:active {
     background: var(--medium);
 }
 
-.edit-btn:hover {
+.edit-btn:hover, .edit-btn:active {
     background: #e6f3ff;
     border-color: #4dabf7;
 }
 
-.delete-btn:hover {
+.delete-btn:hover, .delete-btn:active {
     background: #ffe6e6;
     border-color: #ff6b6b;
 }
@@ -306,17 +335,18 @@ textarea {
 .export-options {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 6px;
-    margin-top: 12px;
+    gap: 8px;
+    margin-top: 15px;
 }
 
 .statistics {
     display: flex;
-    justify-content: space-between;
-    font-size: 11px;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 13px;
     color: #777;
-    margin-top: 12px;
-    padding-top: 12px;
+    margin-top: 15px;
+    padding-top: 15px;
     border-top: 1px solid var(--border);
 }
 
@@ -324,15 +354,15 @@ textarea {
 .filter-section {
     background: #f9f9f9;
     border: 1px solid var(--border);
-    border-radius: 2px;
-    padding: 12px;
-    margin-bottom: 16px;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 20px;
 }
 
 .time-filter-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
 }
 
 .time-select {
@@ -341,76 +371,81 @@ textarea {
     border: 1px solid var(--border);
     color: #333;
     font-family: var(--pixel-font);
-    font-size: 12px;
-    padding: 6px 8px;
-    border-radius: 2px;
+    font-size: 16px;
+    padding: 10px 12px;
+    border-radius: 4px;
     appearance: none;
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
     background-repeat: no-repeat;
-    background-position: right 8px center;
-    background-size: 12px;
-    padding-right: 30px;
+    background-position: right 12px center;
+    background-size: 14px;
+    padding-right: 40px;
 }
 
 .time-controls {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 8px;
-    margin-top: 8px;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 10px;
 }
 
 .time-control {
     width: 100%;
+    font-size: 16px;
+    padding: 10px 12px;
 }
 
 /* 标签筛选选项 */
 .tag-filter-options {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 8px;
-    margin-bottom: 12px;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 15px;
 }
 
 .tag-filter-option {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 11px;
+    gap: 8px;
+    font-size: 14px;
     color: #555;
+    padding: 8px 0;
 }
 
 .tag-filter-option input[type="radio"] {
-    width: auto;
+    width: 20px;
+    height: 20px;
     margin: 0;
 }
 
 .filter-tags-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 8px;
-    min-height: 36px;
-    padding: 8px;
+    gap: 8px;
+    margin-top: 10px;
+    min-height: 44px;
+    padding: 12px;
     background: #fff;
     border: 1px solid var(--border);
-    border-radius: 2px;
+    border-radius: 4px;
 }
 
 .filter-tag {
     background: var(--medium);
     color: #333;
-    padding: 4px 10px;
-    font-size: 11px;
+    padding: 6px 12px;
+    font-size: 13px;
     border: 1px solid var(--border);
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 4px;
-    border-radius: 12px;
+    gap: 5px;
+    border-radius: 16px;
     transition: all 0.2s;
+    min-height: 36px;
 }
 
-.filter-tag:hover {
+.filter-tag:hover, .filter-tag:active {
     background: var(--accent);
 }
 
@@ -423,18 +458,18 @@ textarea {
 .filter-button-group {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin: 16px 0;
+    gap: 10px;
+    margin: 20px 0;
 }
 
 .filter-stats {
-    font-size: 12px;
+    font-size: 14px;
     color: #333;
     text-align: center;
-    padding: 8px;
+    padding: 12px;
     background: #f0f0f0;
-    border-radius: 2px;
-    margin-top: 12px;
+    border-radius: 4px;
+    margin-top: 15px;
 }
 
 .filter-stats span {
@@ -443,79 +478,70 @@ textarea {
 }
 
 /* 移动端优化 */
-@media (max-width: 768px) {
+@media (min-width: 768px) {
     .container {
-        grid-template-columns: 1fr;
-        gap: 8px;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        max-width: 1200px;
     }
     
     body {
-        padding: 6px;
-        font-size: 13px;
+        font-size: 12px;
+        padding: 12px;
     }
     
     .section {
-        padding: 10px;
+        padding: 12px;
     }
     
-    .filter-section {
-        padding: 10px;
-    }
-    
-    .tag-filter-options {
-        grid-template-columns: 1fr;
-    }
-    
-    .time-controls {
-        grid-template-columns: 1fr;
-    }
-    
-    .filter-button-group {
-        grid-template-columns: 1fr;
-    }
-    
-    /* 博客列表优化 */
-    .blog-item {
-        padding: 10px;
+    textarea, input, select {
+        font-size: 12px;
+        padding: 6px 8px;
     }
     
     .blog-item-header {
-        flex-direction: column;
-        gap: 4px;
+        flex-direction: row;
+        justify-content: space-between;
     }
     
-    .blog-item-actions {
-        flex-direction: column;
-        gap: 6px;
+    .time-controls {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     }
     
-    .action-btn {
-        width: 100%;
-        text-align: center;
+    .tag-filter-options {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     }
-}
-
-/* 响应式表单输入 */
-textarea, input, select {
-    font-size: 14px; /* 手机端字体更大 */
-}
-
-@media (min-width: 769px) {
-    textarea, input, select {
-        font-size: 12px; /* 电脑端恢复原大小 */
+    
+    .time-select {
+        font-size: 12px;
+        padding: 6px 8px;
+        padding-right: 30px;
+        background-size: 12px;
     }
 }
 
 /* 触摸友好优化 */
-.button, .action-btn, .tag, .filter-tag {
-    min-height: 36px;
+.button, .action-btn, .tag, .filter-tag, .now-button {
+    min-height: 44px;
     touch-action: manipulation;
+    user-select: none;
 }
 
 /* 防止移动端缩放 */
 @media (max-width: 768px) {
     input, textarea, select {
-        font-size: 16px;
+        font-size: 16px !important;
+    }
+    
+    /* 改善移动端触摸体验 */
+    a, button, input, textarea, select {
+        -webkit-tap-highlight-color: rgba(0,0,0,0.1);
+    }
+    
+    /* 改善滚动体验 */
+    .blog-list {
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
     }
 }
 
@@ -538,4 +564,45 @@ textarea, input, select {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #aaa;
+}
+
+/* 移动端特定优化 */
+@media (max-width: 480px) {
+    .button-group {
+        grid-template-columns: 1fr;
+    }
+    
+    .filter-button-group {
+        grid-template-columns: 1fr;
+    }
+    
+    .blog-item-actions {
+        grid-template-columns: 1fr;
+    }
+    
+    .section {
+        padding: 12px;
+    }
+    
+    .button, .action-btn {
+        padding: 14px;
+        font-size: 15px;
+    }
+}
+
+/* 改善小屏幕手机体验 */
+@media (max-width: 360px) {
+    body {
+        padding: 6px;
+        font-size: 13px;
+    }
+    
+    .section {
+        padding: 10px;
+    }
+    
+    .button, .action-btn {
+        padding: 12px;
+        font-size: 14px;
+    }
 }
