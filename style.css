@@ -159,20 +159,17 @@ body::after {
     --z-decoration: 5;
 }
 
-/* 统一导航链接颜色 */
-.nav-links a {
-    color: #A5B8E9 !important;
-}
+
 
 .social-link {
     color: #E6F0FF; /* 你想要的颜色，比如蓝色 */
-    text-decoration: none; /* 可选：去除下划线 */
+    text-decoration: underline; /* 可选：去除下划线 */
     transition: color var(--transition-fast); /* 可选：添加颜色过渡效果 */
 }
 
 .social-link:hover {
     color: #FFA500; /* 鼠标悬停时的颜色 */
-    text-decoration: none; /* 可选：悬停时显示下划线 */
+    text-decoration: underline; /* 可选：悬停时显示下划线 */
 }
 
 
@@ -194,6 +191,7 @@ body::after {
     font-family: var(--font-serif);
 }
 
+
 .nav-links {
     display: flex;
     gap: var(--space-xl); /* 链接之间的间距 */
@@ -201,7 +199,7 @@ body::after {
 
 /* 确保导航链接样式 */
 .nav-links a {
-    color: var(--color-text-tertiary);
+    color: #A5B8E9;
     text-decoration: none;
     font-family: var(--font-serif);
     font-size: 1.1rem;
@@ -493,7 +491,7 @@ p {
     display: block;
     border: 6px solid transparent;
     background: linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
-                linear-gradient(#E6F0FF) border-box;
+                linear-gradient(135deg, #FFA500, #FFD700) border-box;
     box-shadow: 
         var(--shadow-lg),
         0 0 30px rgba(255, 140, 0, 0.3),

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>导出的博客 - 2026/1/10</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Courier New', monospace; 
+            background: #fafafa; 
+            color: #333; 
+            line-height: 1.6; 
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .header { 
+            text-align: center; 
+            margin-bottom: 30px; 
+            padding-bottom: 15px;
+            border-bottom: 2px solid #ddd;
+        }
+        .header h1 { 
+            font-size: 24px; 
+            color: #444; 
+            margin-bottom: 10px;
+        }
+        .header-info { 
+            font-size: 12px; 
+            color: #888; 
+        }
+        .search-box {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        .blog-post { 
+            background: white; 
+            border: 1px solid #ddd; 
+            padding: 20px; 
+            margin-bottom: 20px; 
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .post-header { 
+            display: flex; 
+            justify-content: space-between; 
+            margin-bottom: 15px; 
+            font-size: 12px; 
+            color: #666; 
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .post-content { 
+            margin-bottom: 15px; 
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .tags { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 5px; 
+            margin-top: 15px; 
+        }
+        .tag { 
+            background: #f0f0f0; 
+            color: #555; 
+            padding: 4px 10px; 
+            font-size: 11px; 
+            border-radius: 12px;
+            border: 1px solid #ddd;
+        }
+        img, video { 
+            max-width: 100%; 
+            max-height: 300px; 
+            margin: 10px 0; 
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .stats {
+            text-align: center;
+            margin: 10px 0;
+            color: #666;
+            font-size: 13px;
+        }
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .blog-post { padding: 15px; }
+            .post-header { flex-direction: column; gap: 5px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📝 博客存档</h1>
+        <div class="header-info">
+            导出时间：2026/1/10 21:22:15 | 
+            共 2 条博客
+        </div>
+    </div>
+    
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="搜索博客内容或标签...">
+        <div class="stats">
+            显示 <span id="resultCount">2</span> 条结果
+        </div>
+    </div>
+    
+    <div id="blogContainer">
+        
+                <div class="blog-post" data-id="1767938095039">
+                    <div class="post-header">
+                        <small>2026/1/10 21:21</small>
+                        <small>#5039</small>
+                    </div>
+                    <div class="post-content">更新博客编辑器的部分细节。
+更新主页部分样式，尤其是链接罗列的方式。决定还是多注重文字本身！</div>
+                    
+                    
+                        <div class="tags">
+                            <span class="tag">更新日志</span>
+                        </div>
+                    
+                </div>
+                <div class="blog-post" data-id="1767937564764">
+                    <div class="post-header">
+                        <small>2026/1/8 13:40</small>
+                        <small>#4764</small>
+                    </div>
+                    <div class="post-content">更新了合并博客数据的功能。有点心虚，因为自己并没有出什么力只是把要求告诉给ai而已哈哈。。。但管他呢我觉得能用就行！</div>
+                    
+                    
+                        <div class="tags">
+                            <span class="tag">更新日志</span>
+                        </div>
+                    
+                </div>
+    </div>
+    
+    <div class="blog-post" style="text-align: center; color: #888; font-size: 12px;">
+        好想吃甜甜圈
+    </div>
+    
+    <script>
+        const posts = document.querySelectorAll('.blog-post');
+        const searchInput = document.getElementById('searchInput');
+        const resultCount = document.getElementById('resultCount');
+        
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            let visibleCount = 0;
+            
+            posts.forEach(post => {
+                const content = post.textContent.toLowerCase();
+                const tags = post.querySelectorAll('.tag');
+                const postTags = Array.from(tags).map(tag => tag.textContent.toLowerCase());
+                
+                const matchesSearch = !searchTerm || 
+                    content.includes(searchTerm) || 
+                    postTags.some(tag => tag.includes(searchTerm));
+                
+                if (matchesSearch) {
+                    post.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+            
+            resultCount.textContent = visibleCount;
+        });
+    </script>
+</body>
+</html>
